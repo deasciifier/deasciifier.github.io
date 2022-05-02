@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<title>Online Turkish Deasciifier - deasciifier.com</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="tr" />
+<meta name="google" value="notranslate">
+
+<meta name="description"
+  content="Online Turkish Deasciifier automatically adds accented characters to
+  Turkish text. Useful for people who type Turkish on a non-Turkish keyboard." />
+<meta name="keywords" content="deasciifier, turkish, asciifier, turkce, turkce klavye,
+deniz yuret, turkish text deasciifier, turkce karakter, otomatik turkce karakter cevrimi" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="canonical" href="https://deasciifier.com" />
+
+<script>
+if (window.location.hostname == "www.deasciifier.com" ||
+    window.location.hostname == "turkce-karakter.appspot.com" ||
+    window.location.hostname == "turkce-klavye.appspot.com" ||
+    window.location.hostname == "deascii.com" ||
+    (window.location.hostname == "deasciifier.com" &&
+     window.location.protocol == "http:")) {
+  window.location = "https://deasciifier.com/";
+}
+</script>
+<!-- Google Analytics -->
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-165235-14', 'auto');
+ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+
+<link rel="icon" type="image/png" href="static/icon.png">
+
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Bootstrap -->
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+  integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+  crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+  integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+  crossorigin="anonymous"></script>
+
+<!-- CodeMirror -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.33.0/codemirror.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.33.0/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.33.0/addon/display/placeholder.min.js"></script>
+
+<!-- Font Awesome -->
+<script defer src="https://use.fontawesome.com/releases/v5.0.2/js/all.js"></script>
+
+<!-- Deasciifier -->
+<script src="/static/ts/bundle.js"></script>
+<link rel="stylesheet" href="/static/css/deasciifier.css">
+<style type="text/css">
+  /** BOOTSTRAP: */
+
+  .navbar-brand {
+    display: inline-block;
+    padding: 0;
+    vertical-align: middle;
+  }
+
+  .navbar-brand img {
+    display: inline-block;
+    margin-right: 0.5em;
+    padding: 3px;
+  }
+  .navbar-brand img:hover {
+    -webkit-filter: drop-shadow(0 0 3px #888);
+    filter: drop-shadow(0 0 3px #888);
+  }
+
+  .navbar {
+    border-bottom: 1px solid #888;
+    /* Permalink - use to edit and share this gradient:
+      http://colorzilla.com/gradient-editor/#ffffff+0,ededed+100;WhiteCustom */
+    background: rgb(255,255,255); /* Old browsers */
+    background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(237,237,237,1) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(237,237,237,1) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(237,237,237,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed',GradientType=0 ); /* IE6-9 */
+  }
+
+  .navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
+    margin-left: 0;
+  }
+
+  .heading {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    vertical-align: middle;
+    color: #333;
+    text-shadow: 0 0 10px #222;
+    text-shadow: none;
+  }
+
+  .list-group-item {
+    border: 0;
+  }
+
+  .navbar-li-active {
+    background: rgb(33, 150, 243);
+    color: white;
+    font-weight: bold;
+  }
+  .navbar-li-active:hover {
+    background: orange;
+  }
+  .navbar-li-active .navbar-btn {
+    color: white;
+  }
+
+  .navbar-default .navbar-nav>li>a {
+    color: #444;
+  }
+
+  .navbar-default .navbar-nav>li>a:hover {
+    background: orange;
+    color: white;
+  }
+
+  .checkbox {
+    margin: 0;
+  }
+
+  .list-group {
+    box-shadow: none;
+    -webkit-box-shadow: none;
+  }
+
+  .panel {
+    font-size: 1.2em;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #888;
+    padding: 5px;
+  }
+  /* Overrides */
+
+  html {
+    font-family: 'Proxima Nova', Arial, Helvetica, sans-serif;
+    height: 100%;
+    font-size: 1.2em;
+  }
+
+  body {
+    padding-top: 70px;
+    height: 100%;
+    background: rgb(222, 222, 222);
+    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAEAQMAAACTPww9AAAABlBMVEW+vr7f399B5CCOAAAADUlEQVQIHWMuYK4AQQAHjAHlicLi5wAAAABJRU5ErkJggg==');
+  }
+
+  .CodeMirror {
+    border: 1px solid #eee;
+    height: auto;
+    font-family: Roboto;
+    font-size: 1.5em;
+  }
+
+  .CodeMirror-scroll {
+    min-height: 80vh;
+  }
+
+  .CodeMirror-empty { outline: 1px solid #c22; }
+  .CodeMirror-empty.CodeMirror-focused { outline: none; }
+  .CodeMirror pre.CodeMirror-placeholder { color: #999; }
+
+  .container {
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .container-fluid {
+    width: 900px; /* Or 70em, but then virtual keyboard doesn't work. */
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .text-container {
+    width: 900px; /* Same as container-fluid.width */
+    margin: 0 auto;
+    padding: 1px;
+    box-shadow: 0 0 8px #888;
+  }
+
+  .navbar-nav {
+    margin: 0 auto;
+  }
+
+  .navbar-right {
+    margin-right: 0;
+    float: right;
+  }
+
+  .mea-keyboard-main {
+    font-size: 1.5em;
+    margin: 0 auto;
+    width: 100%;
+    position: fixed;
+    z-index: 199;
+    bottom: 0;
+  }
+
+  .mea-keyboard-layout {
+    width: 900px;
+    margin: 0 auto;
+    background: #EfEfEf;
+    background: #111;
+    box-shadow: 0 0 5px #888;
+    border: 1px solid #888;
+  }
+
+  .mea-keyboard-btn-table {
+    /*padding: 2px 2px;*/
+    padding: 0;
+    margin: 0;
+  }
+
+  .mea-keyboard-btn-table input {
+    /* Default style for buttons in the table */
+    margin: 0;
+    padding: 0.2em;
+    cursor: pointer;
+    /*width: 2em;
+    height: 2em;*/
+    text-align: center;
+    /*border: 1px solid #333;*/
+    border-right: 1px solid #333;
+    border-bottom: 1px solid #333;
+    /*border-radius: 3px;
+    background: -moz-linear-gradient(top, white, #DDD);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fff), to(#ddd));
+    */
+  }
+
+  .mea-keyboard-btn-table input:active {
+    background: #888;
+    color: -moz-only-whitespace;
+  }
+
+  .mea-keyboard-key-row {
+    clear: both;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .mea-keyboard-key {
+    display: inline-block;
+    padding: 0.2em 0.2em;
+    background: #ccc;
+    margin: 1px 1px;
+    /*text-align: center;*/
+    border-radius: 0;
+    min-width: 2.5em;
+    min-height: 2.5em;
+    line-height: 2.5em;
+    user-select: none;
+    color: #333;
+    /*margin: 0.1em 0.1em;
+    border-radius: 4px;*/
+  }
+
+  .mea-keyboard-key:focus {
+    color: lightblue;
+  }
+
+  .mea-keyboard-key-emphasized {
+    font-weight: bold;
+    background: #e8e8e8;
+  }
+
+  .mea-keyboard-key-active {
+    background: orange;
+  }
+
+  .mea-keyboard-special-key {
+    display: flex;
+    flex-grow: 1;
+  }
+
+  .mea-keyboard-key:hover {
+    background: orange;
+    cursor: pointer;
+  }
+
+  .mea-keyboard-btn-table input:hover {
+    box-shadow: 0px 0px 3px #888;
+  }
+
+  .mea-keyboard-main-controls {
+    text-align: right;
+    padding: 1px;
+  }
+
+  .mea-keyboard-key-last {
+    text-align: right;
+  }
+
+  .navbar {
+    box-shadow: -5px 0 5px #333;
+  }
+
+  .navbar-btn {
+    background: none;
+    color: none;
+    border: 0;
+    border-radius: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 40px;
+    padding-left: 1em;
+    padding-right: 1em;
+    font-size: 1.2em;
+    min-width: 3.5em;
+  }
+  .navbar-btn:hover {
+    background: orange;
+    color: white;
+  }
+
+  /* 900px/0.95 = 948px */
+  @media (max-width: 948px) {
+    .container-fluid {
+      width: 95%;
+    }
+    .text-container {
+      width: 95%;
+    }
+    .mea-keyboard-layout {
+      width: 95%;
+    }
+    .mea-keyboard-key {
+      min-width: 2em;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .nav > li {
+      display: inline-block;
+    }
+    .mea-keyboard-key {
+      min-width: 1.5em;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .navbar-btn {
+      font-size: 1em;
+      min-width: 3em;
+    }
+    .mea-keyboard-key {
+      min-width: 1em;
+    }
+  }
+
+</style>
+</head>
+
+<body>
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container-fluid">
+
+    <a class="navbar-brand" href="/">
+      <img src="static/icon.svg" height="100%" title="Deasciifier logo">
+      <h3 class="heading hidden-xs">Turkish Deasciifier</h3>
+    </a>
+    <div class="navbar-right">
+      <ul class="nav navbar-nav">
+        <li class="navbar-li-active">
+          <button id="deasciify-btn" class="btn btn-default navbar-btn"
+              title="cgiosu → çğıöşü">
+            <i class="fas fa-star hidden-xs"></i>
+            <span class="hidden-xs">Deasciify</span>
+            <span class="visible-xs">D</span>
+          </button>
+        </li>
+        <li>
+          <button id="asciify-btn" class="btn btn-default navbar-btn"
+              title="çğıöşü → cgiosu">
+            <span class="hidden-xs">Asciify</span>
+            <span class="visible-xs">A</span>
+          </button>
+        </li>
+        <li style="border-left: 1px solid #ccc">
+          <button id="undo-btn"  class="btn btn-default navbar-btn"
+              title="Geri al">
+            <i title="Geri al" class="fas fa-undo-alt"></i>
+          </button>
+        </li>
+        <li style="border-left: 1px solid #ccc">
+          <button id="redo-btn" class="btn btn-default navbar-btn"
+              title="Yinele">
+            <i title="Yinele" class="fas fa-redo-alt"></i>
+          </button>
+        </li>
+        <li style="border-left: 1px solid #ccc">
+          <button id="keyboard-btn" class="btn btn-default navbar-btn"
+              title="Klavyeyi göster">
+            <i title="Klavye" class="fas fa-keyboard"></i>
+          </button>
+        </li>
+        <li style="border-left: 1px solid #ccc; border-right: 1px solid #ccc">
+          <button id="settings-btn" class="btn btn-default navbar-btn"
+              title="Ayarlar &amp; Diğer">
+            <i title="Ayarlar" class="fas fa-cog"></i>
+          </button>
+        </li>
+        <!--
+        <li style="border-left: 1px solid #ccc; border-right: 1px solid #ccc">
+          <button id="benchmark-btn" class="btn btn-default navbar-btn"
+              title="...">
+            <i title="Ayarlar" class="fas fa-ellipsis-h"></i>
+          </button>
+        </li>-->
+      </ul>
+    </div>
+  </div>
+  <!-- /.container-fluid -->
+</nav>
+<div id="benchmark-result"></div>
+<div id="status"></div>
+<div id="keyboard" style="display: none"></div>
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="settings">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Ayarlar &amp; Diğer</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-6">
+            <ul class="list-group">
+              <li class="list-group-item">
+                <div class="checkbox">
+                  <label>
+                      <input type="checkbox" value="" checked id="option-auto-convert">
+                      Yazarken çevir
+                    </label>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="checkbox">
+                  <label>
+                      <input type="checkbox" value="" checked id="option-correction-menu">
+                      Düzeltme menüsünü göster
+                    </label>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-md-6" style="border-left: 1px solid #ccc">
+            <ul class="list-group">
+              <li class="list-group-item">
+                <a href="https://chrome.google.com/webstore/detail/turkish-deasciifier/nhfdmlgglfmcdheoabgklabmgjklgofk">
+                <i class="fab fa-chrome"></i>
+                Chrome eklentisi</a>
+              </li>
+              <li class="list-group-item">
+                <a href="https://addons.mozilla.org/en-US/firefox/addon/deasciifier/">
+                <i class="fab fa-firefox"></i>
+                Firefox eklentisi</a>
+              </li>
+              <li class="list-group-item">
+                <a href="https://deasciifier.uservoice.com/">
+                <i class="fas fa-comment"></i>
+                Geribildirim</a>
+              </li>
+              <li class="list-group-item">
+                <a href="https://github.com/meacer/deasciifier">
+                <i class="fab fa-github"></i>
+                GitHub</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div>
+          <b>Gizlilik:</b> Türkçeleştirme tamamen sizin bilgisayarınızda
+          yapılmaktadır. Girdiğiniz metin kaydedilmemekte veya Internet
+          üzerinden başka bir bilgisayara aktarılmamaktadır.
+          <br><br>
+          Deasciifier kodu Mustafa Emre Acer tarafından Dr. Deniz Yüret'in Emacs
+          için geliştirdiği turkish-mode'dan çevrilmiştir.
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="text-container">
+  <textarea id="txt" placeholder="Çevirmek istediğiniz metni buraya giriniz."></textarea>
+</div>
+<div style="margin: 0 auto; width: 100%; text-align: center; margin-top: 2em; margin-bottom: 1em">
+  deasciifier.com 2022 - <a href="/v1.html" style="color: #333; font-weight: bold" target="_blank">Eski site</a>
+</div>
+<script>
+var editor = CodeMirror.fromTextArea(document.getElementById("txt"), {
+  lineNumbers: false,
+  viewportMargin: Infinity,
+  lineWrapping: true,
+  minHeight: 900,
+  height: "dynamic",
+  autofocus: true,
+  readOnly: "nocursor"
+});
+
+function getSizeBin(result) {
+  if (!result || !result.text) {
+    return "empty";
+  }
+  var bins = [10, 25, 50,
+              100, 250, 500,
+              1000, 2000, 5000,
+              10000, 25000, 50000,
+              100000, 250000, 500000,
+              1000000];
+  for (var i = 0; i < bins.length; i++) {
+    if (result.text.length < bins[i]) {
+      return "length" + bins[i];
+    }
+  }
+  return "large";
+}
+
+var app = null;
+window.Deasciifier = window.Deasciifier || {};
+window.Deasciifier.onPatternListLoaded = function(patternList) {
+  editor.setOption("readOnly", false);
+  editor.focus();
+  app = new DeasciifierApp.App(
+      editor, patternList, document.body, document.getElementById("keyboard"));
+
+  $("#deasciify-btn").click(function() {
+    var result = app.deasciifySelection();
+    ga('send', 'event', 'button', 'deasciify', getSizeBin(result));
+  });
+
+  $("#asciify-btn").click(function() {
+    var result = app.asciifySelection();
+    ga('send', 'event', 'button', 'asciify', getSizeBin(result));
+  });
+
+  $("#settings-btn").click(function() {
+    $("#settings").modal();
+    ga('send', 'event', 'button', 'settings');
+  });
+
+  $("#undo-btn").click(function() {
+    app.hideCorrectionMenu();
+    editor.execCommand("undo");
+    ga('send', 'event', 'button', 'undo');
+  });
+
+  $("#redo-btn").click(function() {
+    app.hideCorrectionMenu();
+    editor.execCommand("redo");
+    ga('send', 'event', 'button', 'redo');
+  });
+
+  $("#option-auto-convert").change(function(event) {
+    app.setEnableAutoConvert($(event.target).prop('checked'));
+  });
+
+  $("#option-correction-menu").change(function(event) {
+    app.setEnableCorrectionMenu($(event.target).prop('checked'));
+  });
+
+  $("#keyboard-btn").click(function() {
+    $("#keyboard").slideToggle({duration: 200});
+    ga('send', 'event', 'button', 'keyboard');
+  });
+
+  $("#benchmark-btn").click(function() {
+    console.log("Benchmarking...");
+    $("#benchmark-result").html("");
+    $.get("/static/test_text.txt", function(text) {
+      editor.setValue(text);
+      var start = new Date();
+      var result = app.deasciifier_instance.process(text);
+      var time = new Date() - start;
+      editor.setValue(result.text);
+      $("#benchmark-result").html("Deasciified: " + time + " milliseconds");
+    });
+  });
+}
+</script>
+
+<!-- Pattern list (very large) -->
+<script type="text/javascript">
+(function(){
+  var sc = document.createElement("script");
+  sc.type = "text/javascript";
+  sc.async = true;
+  sc.src = "/static/js/_generated_patterns.js?2";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(sc, s);
+})();
+</script>
+<!-- /Pattern list -->
+
+</body>
+</html>
